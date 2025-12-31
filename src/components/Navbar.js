@@ -2,15 +2,20 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Menu, X, MessageCircle, FileText } from 'lucide-react';
 import './Navbar.css';
+import { useTranslation } from "react-i18next";
 
 function Navbar({ user, onLogout }) {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const { i18n, t } = useTranslation();
 
   const handleLogout = () => {
     onLogout();
     navigate('/login');
-    setMobileMenuOpen(false);
+    setMobileMenuOpen(false)};
+
+  const changeLanguage = (lang) => { 
+    i18n.changeLanguage(lang);
   };
 
   return (
@@ -22,22 +27,32 @@ function Navbar({ user, onLogout }) {
           </Link>
         </div>
 
+          {/* Language Switcher */}
+          <div className="language-switcher">
+            <button onClick={() => i18n.changeLanguage("en")} className="lang-btn">
+              English 
+              </button>
+              <button onClick={() => i18n.changeLanguage("kn")} className="lang-btn"> 
+              ಕನ್ನಡ
+              </button>
+              </div>
+        
         {user && (
           <>
             <div className="navbar-menu">
-              <Link to="/" className="nav-link">Home</Link>
-              <Link to="/book-service" className="nav-link">Book Service</Link>
-              <Link to="/professionals" className="nav-link">Find Professionals</Link>
-              <Link to="/bookings" className="nav-link">My Bookings</Link>
+              <Link to="/" className="nav-link">{t("home")}</Link>
+              <Link to="/book-service" className="nav-link">{t("book_service")}</Link>
+              <Link to="/professionals" className="nav-link">{t("find_professionals")}</Link>
+              <Link to="/bookings" className="nav-link">{t("my_bookings")}</Link>
               <Link to="/report-problem" className="nav-link">
                 <FileText size={16} />
-                Report Problem
+                {t("report_problem")}
               </Link>
               <div className="user-menu">
                 <User size={20} />
                 <span>{user.name}</span>
                 <button onClick={handleLogout} className="btn btn-secondary">
-                  Logout
+                  {t("logout")}
                 </button>
               </div>
             </div>
@@ -52,25 +67,25 @@ function Navbar({ user, onLogout }) {
             {mobileMenuOpen && (
               <div className="mobile-menu">
                 <Link to="/" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
-                  Home
+                  {t("home")}
                 </Link>
                 <Link to="/book-service" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
-                  Book Service
+                  {t("book_service")}
                 </Link>
                 <Link to="/professionals" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
-                  Find Professionals
+                  {t("find_professionals")}
                 </Link>
                 <Link to="/bookings" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
-                  My Bookings
+                  {t("my_bookings")}
                 </Link>
                 <Link to="/report-problem" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
                   <FileText size={16} />
-                  Report Problem
+                  {t("report_problem")}
                 </Link>
                 <div className="mobile-user-info">
-                  <span>Welcome, {user.name}</span>
+                  <span>{t("welcome")}, {user.name}</span>
                   <button onClick={handleLogout} className="btn btn-secondary">
-                    Logout
+                    {t("logout")}
                   </button>
                 </div>
               </div>
