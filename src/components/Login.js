@@ -79,7 +79,7 @@ function Login({ onLogin }) {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>{t("welcome")}</h1>
+          <h1>{t("welcome_back")}</h1>
           <p>{t("login_description")}</p>
         </div>
 
