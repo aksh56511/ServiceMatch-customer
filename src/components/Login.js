@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import './Auth.css';
+import { useTranslation } from "react-i18next";
 
 function Login({ onLogin }) {
   const [formData, setFormData] = useState({
@@ -72,19 +73,21 @@ function Login({ onLogin }) {
     }, 1000);
   };
 
+   const { t } = useTranslation();
+
   return (
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>Welcome Back</h1>
-          <p>Sign in to book professional services</p>
+          <h1>{t("welcome_back")}</h1>
+          <p>{t("login_description")}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="email" className="form-label">
               <Mail size={18} />
-              Email Address
+              {t("email_address")}
             </label>
             <input
               type="email"
@@ -93,7 +96,7 @@ function Login({ onLogin }) {
               value={formData.email}
               onChange={handleChange}
               className={`form-input ${errors.email ? 'error' : ''}`}
-              placeholder="Enter your email"
+              placeholder={t("enter_email")}
               disabled={loading}
             />
             {errors.email && <span className="error-message">{errors.email}</span>}
@@ -102,7 +105,7 @@ function Login({ onLogin }) {
           <div className="form-group">
             <label htmlFor="password" className="form-label">
               <Lock size={18} />
-              Password
+              {t("password")}
             </label>
             <div className="password-input-wrapper">
               <input
@@ -112,7 +115,7 @@ function Login({ onLogin }) {
                 value={formData.password}
                 onChange={handleChange}
                 className={`form-input ${errors.password ? 'error' : ''}`}
-                placeholder="Enter your password"
+                placeholder={t("enter_password")}
                 disabled={loading}
               />
               <button
@@ -132,14 +135,14 @@ function Login({ onLogin }) {
             className={`btn btn-primary auth-submit ${loading ? 'loading' : ''}`}
             disabled={loading}
           >
-            {loading ? 'Signing In...' : 'Sign In'}
+            {loading ? t("signing_in") : t("sign_in")}
           </button>
         </form>
 
         <div className="auth-footer">
           <p>
-            Don't have an account?{' '}
-            <Link to="/signup" className="auth-link">Sign up here</Link>
+            {t("no_account")}{' '}
+            <Link to="/signup" className="auth-link">{t("sign_up_here")}</Link>
           </p>
         </div>
       </div>

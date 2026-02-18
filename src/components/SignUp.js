@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, Phone, Eye, EyeOff } from 'lucide-react';
 import './Auth.css';
+import { useTranslation } from "react-i18next";
 
 function SignUp({ onLogin }) {
   const [formData, setFormData] = useState({
@@ -94,19 +95,21 @@ function SignUp({ onLogin }) {
     }, 1000);
   };
 
+  const { t } = useTranslation();
+
   return (
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>Create Account</h1>
-          <p>Sign up to start booking professional services</p>
+          <h1>{t("signup_title")}</h1>
+          <p>{t("signup_description")}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="name" className="form-label">
               <User size={18} />
-              Full Name
+              {t("full_name")}
             </label>
             <input
               type="text"
@@ -115,7 +118,7 @@ function SignUp({ onLogin }) {
               value={formData.name}
               onChange={handleChange}
               className={`form-input ${errors.name ? 'error' : ''}`}
-              placeholder="Enter your full name"
+              placeholder={t("enter_full_name")}
               disabled={loading}
             />
             {errors.name && <span className="error-message">{errors.name}</span>}
@@ -124,7 +127,7 @@ function SignUp({ onLogin }) {
           <div className="form-group">
             <label htmlFor="email" className="form-label">
               <Mail size={18} />
-              Email Address
+              {t("email_address")}
             </label>
             <input
               type="email"
@@ -133,7 +136,7 @@ function SignUp({ onLogin }) {
               value={formData.email}
               onChange={handleChange}
               className={`form-input ${errors.email ? 'error' : ''}`}
-              placeholder="Enter your email"
+              placeholder={t("enter_email")}
               disabled={loading}
             />
             {errors.email && <span className="error-message">{errors.email}</span>}
@@ -142,7 +145,7 @@ function SignUp({ onLogin }) {
           <div className="form-group">
             <label htmlFor="phone" className="form-label">
               <Phone size={18} />
-              Phone Number
+              {t("phone_number")}
             </label>
             <input
               type="tel"
@@ -151,7 +154,7 @@ function SignUp({ onLogin }) {
               value={formData.phone}
               onChange={handleChange}
               className={`form-input ${errors.phone ? 'error' : ''}`}
-              placeholder="Enter your phone number"
+              placeholder={t("enter_phone")}
               disabled={loading}
             />
             {errors.phone && <span className="error-message">{errors.phone}</span>}
@@ -160,7 +163,7 @@ function SignUp({ onLogin }) {
           <div className="form-group">
             <label htmlFor="password" className="form-label">
               <Lock size={18} />
-              Password
+              {t("password")}
             </label>
             <div className="password-input-wrapper">
               <input
@@ -170,7 +173,7 @@ function SignUp({ onLogin }) {
                 value={formData.password}
                 onChange={handleChange}
                 className={`form-input ${errors.password ? 'error' : ''}`}
-                placeholder="Create a password"
+                placeholder={t("create_password")}
                 disabled={loading}
               />
               <button
@@ -188,7 +191,7 @@ function SignUp({ onLogin }) {
           <div className="form-group">
             <label htmlFor="confirmPassword" className="form-label">
               <Lock size={18} />
-              Confirm Password
+              {t("confirm_password")}
             </label>
             <div className="password-input-wrapper">
               <input
@@ -198,7 +201,7 @@ function SignUp({ onLogin }) {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 className={`form-input ${errors.confirmPassword ? 'error' : ''}`}
-                placeholder="Confirm your password"
+                placeholder={t("confirm_your_password")}
                 disabled={loading}
               />
               <button
@@ -218,14 +221,14 @@ function SignUp({ onLogin }) {
             className={`btn btn-primary auth-submit ${loading ? 'loading' : ''}`}
             disabled={loading}
           >
-            {loading ? 'Creating Account...' : 'Create Account'}
+            {loading ? t("creating_account") : t("create_account")}
           </button>
         </form>
 
         <div className="auth-footer">
           <p>
-            Already have an account?{' '}
-            <Link to="/login" className="auth-link">Sign in here</Link>
+            {t("already_have_account")}{' '}
+            <Link to="/login" className="auth-link">{t("sign_in_here")}</Link>
           </p>
         </div>
       </div>

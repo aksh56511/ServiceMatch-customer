@@ -2,38 +2,40 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Star, Clock, MapPin, Users } from 'lucide-react';
 import './Home.css';
+import { useTranslation } from "react-i18next";
 
 function Home() {
   const stats = [
-    { icon: Users, label: 'Verified Professionals', value: '500+' },
-    { icon: Star, label: 'Average Rating', value: '4.8' },
-    { icon: Clock, label: 'Avg Response Time', value: '15 min' },
-    { icon: MapPin, label: 'Cities Covered', value: '25+' }
+    { icon: Users, labelKey: "verified_professionals", value: '500+' },
+    { icon: Star, labelKey: "average_rating", value: '4.8' },
+    { icon: Clock, labelKey: "avg_response_time", value: '15 min' },
+    { icon: MapPin, labelKey: "cities_covered", value: '25+' }
   ];
 
   const popularServices = [
-    { name: 'Plumbing', image: '🔧', bookings: '1,200+ bookings' },
-    { name: 'Electrician', image: '⚡', bookings: '950+ bookings' },
-    { name: 'Carpentry', image: '🔨', bookings: '750+ bookings' }
+    { nameKey: "plumbing", image: '🔧', bookingsKey: "plumbing_bookings" },
+    { nameKey: "electrician", image: '⚡', bookingsKey: "electrician_bookings" },
+    { nameKey: "carpentry", image: '🔨', bookingsKey: "carpentry_bookings" }
   ];
+
+  const { t } = useTranslation();
 
   return (
     <div className="home">
       <section className="hero">
         <div className="container">
           <div className="hero-content">
-            <h1>Book Trusted Professionals Near You</h1>
+            <h1>{t("home_hero_title")}</h1>
             <p>
-              Get instant access to verified service professionals in your area. 
-              From home cleaning to repairs, we've got you covered with quality service at transparent pricing.
+              {t("home_hero_description")}
             </p>
             <div className="hero-actions">
               <Link to="/professionals" className="btn btn-primary hero-btn">
                 <Search size={20} />
-                Find Professionals
+                {t("find_professionals")}
               </Link>
               <Link to="/bookings" className="btn btn-secondary hero-btn">
-                📋 My Bookings
+                📋 {t("my_bookings")}
               </Link>
             </div>
           </div>
@@ -72,7 +74,7 @@ function Home() {
                 <stat.icon size={24} className="stat-icon" />
                 <div className="stat-content">
                   <div className="stat-value">{stat.value}</div>
-                  <div className="stat-label">{stat.label}</div>
+                  <div className="stat-label">{t(stat.labelKey)}</div>
                 </div>
               </div>
             ))}
@@ -83,21 +85,21 @@ function Home() {
       <section className="popular-services">
         <div className="container">
           <div className="section-header">
-            <h2>Popular Services</h2>
-            <p>Most booked services in your area</p>
+            <h2>{t("popular_services")}</h2>
+            <p>{t("popular_services_description")}</p>
           </div>
           <div className="services-grid">
             {popularServices.map((service, index) => (
               <div key={index} className="service-item">
                 <div className="service-icon">{service.image}</div>
-                <h3>{service.name}</h3>
-                <p>{service.bookings}</p>
+                <h3>{t(service.nameKey)}</h3>
+                <p>{t(service.bookingsKey)}</p>
               </div>
             ))}
           </div>
           <div className="services-footer">
             <Link to="/professionals" className="btn btn-primary">
-              View All Services
+              {t("view_all_services")}
             </Link>
           </div>
         </div>
@@ -106,24 +108,24 @@ function Home() {
       <section className="how-it-works">
         <div className="container">
           <div className="section-header">
-            <h2>How It Works</h2>
-            <p>Book professional services in 3 simple steps</p>
+            <h2>{t("how_it_works")}</h2>
+            <p>{t("how_it_works_description")}</p>
           </div>
           <div className="steps-grid">
             <div className="step">
               <div className="step-number">1</div>
-              <h3>Choose Service</h3>
-              <p>Browse and select from our wide range of professional services</p>
+              <h3>{t("choose_service")}</h3>
+              <p>{t("choose_service_description")}</p>
             </div>
             <div className="step">
               <div className="step-number">2</div>
-              <h3>Pick Professional</h3>
-              <p>Review profiles, ratings, and choose the best professional for your needs</p>
+              <h3>{t("pick_professional")}</h3>
+              <p>{t("pick_professional_description")}</p>
             </div>
             <div className="step">
               <div className="step-number">3</div>
-              <h3>Book & Relax</h3>
-              <p>Schedule your service and let our verified professionals handle the rest</p>
+              <h3>{t("book_relax")}</h3>
+              <p>{t("book_relax_description")}</p>
             </div>
           </div>
         </div>
